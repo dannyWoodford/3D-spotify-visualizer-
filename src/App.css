@@ -1,22 +1,21 @@
 .App {
-  text-align: center;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  background-color: grey;
 }
 
-.App-logo {
-  height: 40vmin;
+#main-container {
+  grid-column: 2;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#side-container {
+  grid-column: 1;
+  background-color: gray;
 }
 
-.App-link {
-  color: #09d3ac;
+.visuals {
+  height: 90%;
+  width: 100%
 }
