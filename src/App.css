@@ -13,7 +13,26 @@
 #side-container {
   grid-column: 1;
   background-color: gray;
+  display: grid;
+  grid-template-rows: 50% 50%;
 }
+
+#songs {
+  border: 1px solid rgba(255, 255, 255, 0.356);
+}
+
+#now-playing {
+  grid-row: 2;
+  border: 1px solid rgba(255, 255, 255, 0.356);
+}
+
+  #now-playing #title {
+    color: whitesmoke;
+  }
+  #now-playing #album-cover {
+    height: 150px;
+    width: 150px;
+  }
 
 .visuals {
   height: 90%;

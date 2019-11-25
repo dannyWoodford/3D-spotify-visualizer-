@@ -115,7 +115,7 @@ class Visuals extends Component {
     this.tl.to(this.knot.rotation, .5, {z: Math.PI*.5, ease: Expo.easeOut})
     this.tl.to(this.knot.scale, .5, {y: .5, ease: Expo.easeOut})
 
-    document.addEventListener('click', () => {
+    this.el.addEventListener('click', () => {
       this.tl.play()
     })
 
