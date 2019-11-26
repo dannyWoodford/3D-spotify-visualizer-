@@ -2,39 +2,92 @@
   height: 100vh;
   width: 100vw;
   display: grid;
-  grid-template-columns: 25% 75%;
-  background-color: grey;
+  grid-template-columns: 22% 78%;
+  background: #3D3D3D;
+  background: -moz-linear-gradient(-45deg, rgb(82, 72, 72) 0%, rgb(26, 23, 23) 37%, rgb(0, 0, 0) 100%);
+  background: -webkit-linear-gradient(-45deg, rgb(82, 72, 72) 0%, rgb(26, 23, 23) 37%, #000000 100%);
+  background: linear-gradient(135deg, rgb(82, 72, 72) 0%, rgb(26, 23, 23) 37%, #000000 100%);
 }
+
 
 #main-container {
   grid-column: 2;
 }
 
 #side-container {
+  /* border: 4px solid #fdfdfd46 ; */
   grid-column: 1;
-  background-color: gray;
   display: grid;
   grid-template-rows: 50% 50%;
+  grid-template-columns: 100%;
+  background: #3D000C;
+  background: -moz-radial-gradient(center, rgba(134, 0, 27, .9) 0%, rgba(41, 0, 0, .0) 70%, rgba(0, 0, 0, 8) 100%);
+  background: -webkit-radial-gradient(center, rgba(134, 0, 27, .9) 0%, rgba(41, 0, 0, .0) 70%, rgba(0, 0, 0, 0.0) 100%);
+  background: radial-gradient(ellipse at center, rgba(134, 0, 27, .9) 0%, rgba(41, 0, 0, .0) 70%, rgba(0, 0, 0, 0.0) 100%);
 }
 
-#songs {
-  border: 1px solid rgba(255, 255, 255, 0.356);
+.song {
+  color: whitesmoke;
+
+}
+
+.login {
+  position: fixed;
+  right: 20px;
+  z-index: 3;
+  background-color: transparent;
+  border-radius: 2em;
+  border: 0.2em solid #1ecd97;
+  color: #1ecd97;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 0.7em 1.5em;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  margin: 0 auto;
+}
+.login:hover {
+  background: #1ecd97;
+  color: #333;
 }
 
 #now-playing {
+  border: 20px outset rgba(255, 0, 0, 0.149) ;
   grid-row: 2;
-  border: 1px solid rgba(255, 255, 255, 0.356);
+  background-color: #380f0f13;
 }
 
-  #now-playing #title {
-    color: whitesmoke;
-  }
   #now-playing #album-cover {
-    height: 150px;
-    width: 150px;
+    height: 260px;
+    width: 260px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
+  #now-playing #title {
+     color: rgb(255, 255, 255);
+    margin: 4px;
+    margin-left: 10px;
+  }
+  #now-playing #artist {
+    color: rgba(255, 255, 255, 0.637);
+    margin: 0px;
+    margin-left: 10px;
+  }
+
+#player {
+  bottom: 0;
+  width: 78%;
+  position: fixed;
+  z-index: 2;
+}
+
 .visuals {
-  height: 90%;
-  width: 100%
+  height: 100%;
+  width: 78%;
+  position: fixed;
+  z-index: 2;
+  outline:none;
 }

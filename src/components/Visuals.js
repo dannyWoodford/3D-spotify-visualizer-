@@ -38,12 +38,16 @@ class Visuals extends Component {
       0.1, // near plane
       1000 // far plane
     );
+    // this.listener = new THREE.AudioListener();
+    // this.camera.add( listener );
+
     this.camera.position.z = 100; 
     this.controls = new OrbitControls(this.camera, this.el);
 
     this.renderer = new THREE.WebGLRenderer();
+    this.renderer = new THREE.WebGLRenderer( { alpha: true } );
     this.renderer.setSize(width, height);
-    // this.renderer.setClearColor('white')
+    this.renderer.setClearColor( 0x000000, 0 );
     this.el.appendChild(this.renderer.domElement); // mount using React ref
   };
 
@@ -99,25 +103,25 @@ class Visuals extends Component {
 
   startAnimationLoop = () => {
     // this.knot.position.x += -.3
-    // // this.knot.scale.x += -.005
+    // this.knot.scale.x += -.005
 
  
-    // this.knot.rotation.x += 0.01;
-    // this.knot.rotation.y += 0.02;
+    this.knot.rotation.x += 0.01;
+    this.knot.rotation.y += 0.02;
 
     this.renderer.render(this.scene, this.camera);
 
-    this.tl = new TimelineMax({paused:true})
-    this.tl.to(this.knot.scale, .5, {x: 2, ease: Expo.easeOut})
-    this.tl.to(this.knot.scale, .5 , {x: .5, ease: Expo.easeOut})
-    this.tl.to(this.knot.position, .5, {x: 2, ease: Expo.easeOut})
-    this.tl.to(this.knot.rotation, .5, {x: Math.PI*2, ease: Expo.easeOut})
-    this.tl.to(this.knot.rotation, .5, {z: Math.PI*.5, ease: Expo.easeOut})
-    this.tl.to(this.knot.scale, .5, {y: .5, ease: Expo.easeOut})
+    // this.tl = new TimelineMax({paused:true})
+    // this.tl.to(this.knot.scale, .5, {x: 2, ease: Expo.easeOut})
+    // this.tl.to(this.knot.scale, .5 , {x: .5, ease: Expo.easeOut})
+    // this.tl.to(this.knot.position, .5, {x: 2, ease: Expo.easeOut})
+    // this.tl.to(this.knot.rotation, .5, {x: Math.PI*2, ease: Expo.easeOut})
+    // this.tl.to(this.knot.rotation, .5, {z: Math.PI*.5, ease: Expo.easeOut})
+    // this.tl.to(this.knot.scale, .5, {y: .5, ease: Expo.easeOut})
 
-    this.el.addEventListener('click', () => {
-      this.tl.play()
-    })
+    // this.el.addEventListener('click', () => {
+    //   this.tl.play()
+    // })
 
     // The window.requestAnimationFrame() method tells the browser that you wish to perform
     // an animation and requests that the browser call a specified function

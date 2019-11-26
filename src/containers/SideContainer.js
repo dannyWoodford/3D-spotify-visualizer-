@@ -10,14 +10,15 @@ class SideContainer extends Component {
         // })
       }
 
+
+
+   
+
     render() {
-       
+  
         return (
-            <div id="side-container" >
+            <div id="side-container"  >
                 <div id="songs">
-                    <a href="http://localhost:8888" >
-                        <button>Login to Spotify</button>
-                    </a>
                 {this.renderTracks()}
                 </div>
                 <NowPlaying getNowPlaying={this.props.getNowPlaying} nowPlaying={this.props.nowPlaying} />
