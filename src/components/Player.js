@@ -12,6 +12,7 @@ class Player extends Component {
 
     renderPlayer = () => {
         let data = sessionStorage.getItem('accessToken')
+
         return <SpotifyPlayer styles={{
             altColor: 'rgb(255, 0, 0)',
             bgColor: 'rgba(255,255,255,.08)',
@@ -26,15 +27,19 @@ class Player extends Component {
       }
 
 
-      componentDidUpdate(prevProps){
-        //   console.log("prev", prevProps.nowPlaying)
-        //   console.log("current",this.props.nowPlaying)
-        if(prevProps.nowPlaying != this.props.nowPlaying){
-            this.props.getNowPlaying()
-        }
-      }
-
+      componentDidUpdate(prevProps, prevState){
+          if(this.props.nowPlaying.song_id !== prevProps.nowPlaying.song_id){
+              this.props.getNowPlaying()
+                // setTimxeout(() =>{
+            // this.props.getAudioAnalysis()
+        // },100)
+    }
+    // console.log("hhh",this.props.songAnalysis)
+    }
+    
     render() {
+        // setTimeout(() =>{
+        // },100)
         return (
             <div id="player"  >
                 {this.renderPlayer()}

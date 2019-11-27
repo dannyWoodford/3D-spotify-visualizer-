@@ -68,12 +68,12 @@
 
   #now-playing #title {
      color: rgb(255, 255, 255);
-    margin: 4px;
+    margin: 10px;
     margin-left: 10px;
   }
   #now-playing #artist {
     color: rgba(255, 255, 255, 0.637);
-    margin: 0px;
+    margin-top: 10px;
     margin-left: 10px;
   }
 

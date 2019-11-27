@@ -11,15 +11,11 @@ class SideContainer extends Component {
       }
 
 
-
-   
-
     render() {
-  
         return (
             <div id="side-container"  >
                 <div id="songs">
-                {this.renderTracks()}
+                {/* {this.renderTracks()} */}
                 </div>
                 <NowPlaying getNowPlaying={this.props.getNowPlaying} nowPlaying={this.props.nowPlaying} />
             </div>

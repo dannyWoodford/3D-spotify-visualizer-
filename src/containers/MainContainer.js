@@ -15,8 +15,8 @@ class MainContainer extends React.Component {
             <a href="http://localhost:8888" >
                 <button className="login">Login to Spotify</button>
             </a>
-          {isMounted && <Visuals />}
-          <Player getNowPlaying={this.props.getNowPlaying} isMounted={this.state.isMounted} nowPlaying={this.props.nowPlaying}/>
+          {isMounted && <Visuals  songAnalysis={this.props.songAnalysis} />}
+          <Player songAnalysis={this.props.songAnalysis} getAudioAnalysis={this.props.getAudioAnalysis} getNowPlaying={this.props.getNowPlaying} isMounted={this.state.isMounted} nowPlaying={this.props.nowPlaying}/>
         </div>
       );
     }

@@ -4,14 +4,18 @@ import React, { Component } from 'react';
 
 class NowPlaying extends Component {
 
-    // componentDidMount(){
-    //     this.props.getNowPlaying()
-    //     console.log('p')
-    // }
 
+    componentDidMount(){
+        this.props.getNowPlaying()
+    }
+
+    // componentDidUpdate(prevProps, prevState) {
+    //     if(prevProps.nowPlaying.song_id !== this.props.nowPlaying.song_id){
+    //         this.props.getNowPlaying()
+    //     }
+    // }
     
     render() {
-       
         return (
             <div id="now-playing">
                 <img id="album-cover" src={this.props.nowPlaying.image} alt="album cover"   />
