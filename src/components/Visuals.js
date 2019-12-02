@@ -16,11 +16,14 @@ class Visuals extends Component {
     this.addCustomSceneObjects();
     this.startAnimationLoop();
     window.addEventListener("resize", this.handleWindowResize);
-    
-    setTimeout(() =>{
+    console.log("visuals mount")
+
+    console.log("visuals update")
+
+    // setTimeout(() =>{
       this.getTempo()
       this.theTempo()
-    }, 5000 )
+    // }, 6000 )
 
     setInterval(() => {
       this.setState({
@@ -30,9 +33,13 @@ class Visuals extends Component {
 
     setInterval(() => {
 
-      this.knot.position.z += 8 * this.state.l
+      this.knot.position.z += 3 * this.state.l
+      this.knot2.position.z += 3 * this.state.l
+      this.knot3.position.z += 3 * this.state.l
+      // this.knot2.position.z += 1 * this.state.l
     }, this.theTempo());
       console.log(this.props.songAnalysis)
+
   }
   
   componentWillUnmount() {
@@ -41,13 +48,28 @@ class Visuals extends Component {
     this.controls.dispose();
   }
 
+  shouldComponentUpdate(nextProps, nextState){
+    return nextProps.song_id !== this.props.song_id
+  }
+
+  componentDidUpdate(){
+    console.log("visuals update")
+
+    this.getTempo()
+    this.theTempo()
+
+    this.moveOnTempo()
+   
+      console.log(this.props.songAnalysis)
+  }
+
   getTempo(){
-    if (this.props.songAnalysis !== undefined || this.props.songAnalysis.length != 0) {
+    
       this.setState({
           tempo: this.props.songAnalysis.track.tempo
         })
         console.log(this.props.songAnalysis)
-    }
+
     console.log(this.state.tempo)
   }
 
@@ -58,6 +80,22 @@ class Visuals extends Component {
     }
     console.log(ms)
     return ms
+  }
+
+  moveOnTempo(){
+    setInterval(() => {
+      this.setState({
+        l: this.state.l * -1
+      })
+    }, this.theTempo());
+
+    setInterval(() => {
+
+      this.knot.position.z += 3 * this.state.l
+      this.knot2.position.z += 3 * this.state.l
+      this.knot3.position.z += 3 * this.state.l
+      // this.knot2.position.z += 1 * this.state.l
+    }, this.theTempo());
   }
 
 
@@ -94,13 +132,14 @@ class Visuals extends Component {
 
 
   addCustomSceneObjects = () => {
+    this.knot3()
+    this.knot2()
     this.knot()
-
     this.lights()
   };
 
   knot = () => {
-    const geometry = new THREE.TorusKnotGeometry( 25, 7, 64, 8, 5, 11 );
+    const geometry = new THREE.TorusKnotGeometry( 20, 2, 64, 2, 2, 11 );
     const material = new THREE.MeshPhysicalMaterial({
       color: 'red',
       emissive: 'black',
@@ -110,12 +149,47 @@ class Visuals extends Component {
     this.knot = new THREE.Mesh(geometry, material);
 
     this.knot.position.set(0,0,0)
-    // this.knot.rotation.set(40,20,10)
+    // this.knot.rotation.set(40,0,10)
     // this.knot.scale.set(1,1,1)
 
     this.scene.add(this.knot);
   }
 
+  knot2 = () => {
+    const geometry = new THREE.TorusKnotGeometry( 15, 3, 34, 8, 3, 11 );
+    const material = new THREE.MeshPhysicalMaterial({
+      color: 'rgb(150,40,0)',
+      emissive: 'black',
+      side: THREE.DoubleSide,
+      flatShading: true
+    });
+    this.knot2 = new THREE.Mesh(geometry, material);
+
+    this.knot2.position.set(0,0,0)
+    // this.knot2.rotation.set(40,0,10)
+    // this.knot2.scale.set(1,1,1)
+
+    this.scene.add(this.knot2);
+  }
+
+  knot3 = () => {
+    const geometry = new THREE.TorusKnotGeometry( 10, 3, 44, 8, 5, 11 );
+    const material = new THREE.MeshPhysicalMaterial({
+      color: 'rgb(255,128,0)',
+      emissive: 'black',
+      side: THREE.DoubleSide,
+      flatShading: true
+    });
+    this.knot3 = new THREE.Mesh(geometry, material);
+
+    this.knot3.position.set(0,0,0)
+    // this.knot3.rotation.set(40,0,10)
+    // this.knot3.scale.set(1,1,1)
+
+    this.scene.add(this.knot3);
+  }
+
+  
 
   lights = () => {
     const lights = [];
@@ -140,11 +214,15 @@ class Visuals extends Component {
   
   
   startAnimationLoop = () => {
-    // this.knot.position.x += -.3
+    // this.knot.position.z += .1
     // this.knot.scale.x += -.005
 
- 
-    this.knot.rotation.z += .04;
+    
+    this.knot.rotation.z += .03;
+    this.knot.rotation.x += .02;
+    this.knot2.rotation.z -= .03;
+    this.knot2.rotation.y -= .03;
+    this.knot3.rotation.x -= .04;
     // this.knot.rotation.y += 0.02;
 
     this.renderer.render(this.scene, this.camera);

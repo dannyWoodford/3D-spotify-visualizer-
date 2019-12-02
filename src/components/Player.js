@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import SpotifyPlayer from 'react-spotify-web-playback';
 
-
 class Player extends Component {
 
-    stopVisual() {
-        this.setState({
-            isMounted: false
-        })
-    }
+    // stopVisual() {
+    //     this.setState({
+    //         isMounted: false
+    //     })
+    // }
 
     renderPlayer = () => {
         let data = sessionStorage.getItem('accessToken')
@@ -23,19 +22,26 @@ class Player extends Component {
             loaderColor: 'gba(0,0,0,.2)',
             trackArtistColor: 'rgba(255,255,255,.0)',
             trackNameColor: 'rgba(255,255,255,.0)',
-          }} token={data} uris={this.props.nowPlaying.uris} />;
+          }} token={data} uris={this.props.nowPlaying.uris} 
+          callback={(state) => {
+        
+            setTimeout(
+                this.props.getNowPlaying
+                , 300)
+            }}
+          />;
       }
 
 
-      componentDidUpdate(prevProps, prevState){
-          if(this.props.nowPlaying.song_id !== prevProps.nowPlaying.song_id){
-              this.props.getNowPlaying()
-                // setTimxeout(() =>{
-            // this.props.getAudioAnalysis()
-        // },100)
-    }
-    // console.log("hhh",this.props.songAnalysis)
-    }
+    //   componentDidUpdate(prevProps, prevState){
+    //       if(this.props.nowPlaying.song_id !== prevProps.nowPlaying.song_id){
+    //           this.props.getNowPlaying()
+    //             // setTimxeout(() =>{
+    //         // this.props.getAudioAnalysis()
+    //     // },100)
+    // }
+    // // console.log("hhh",this.props.songAnalysis)
+    // }
     
     render() {
         // setTimeout(() =>{

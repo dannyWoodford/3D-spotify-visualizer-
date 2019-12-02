@@ -16,6 +16,7 @@ const spotifyApi = new SpotifyWebApi({
 class App extends Component {
 
   state={
+    isActive: false, 
     nowPlaying: {
       title: "",
       image: "",
@@ -23,19 +24,24 @@ class App extends Component {
       uris: [],
       song_id: ""
       },
-    songAnalysis: []
+    // songAnalysis: []
   }
  
   params = this.getHashParams()
   params = spotifyApi.setAccessToken(this.params.access_token)
   
   getNowPlaying = () => {
-  
     spotifyApi.getMyCurrentPlaybackState({
     })
     .then((response) => {
-      console.dir(response.body.item)
-      this.setState({
+      // console.dir(response.body)
+    
+      if(response.body == null){
+        return null
+      }
+      else if(response.body.device.is_active === true){
+        this.setState({
+          isActive: true,
         nowPlaying: {
           title: response.body.item.name,
           image: response.body.item.album.images[0].url,
@@ -44,9 +50,8 @@ class App extends Component {
           song_id: response.body.item.id
         }
       })
-    }, (err) => {
-      console.log('Something went wrong!', err);
-    })
+    }
+  })
   }
 
   getHashParams() {
@@ -64,31 +69,45 @@ class App extends Component {
   }
 
 
-  componentDidMount(){
-    this.getNowPlaying()
-    this.getAudioAnalysis()
-  }
+  // componentDidMount(){
+  //   this.getNowPlaying()
+  //   // this.getAudioAnalysis()
+  // }
+
+  // shouldComponentUpdate(nextProps, nextState){
+  //   console.log(nextState.nowPlaying.song_id )
+  //   console.log(this.state.nowPlaying.song_id )
+  //   // this.getNowPlaying()
+  //   return ( nextState.nowPlaying.song_id !== this.state.nowPlaying.song_id )
+  // }
+
+  // componentDidUpdate(){
+  //   console.log("fire")
+  //   this.getNowPlaying()
+  // }
 
 
-  getAudioAnalysis = () => {
-    let accessToken = sessionStorage.getItem('accessToken')
-    setTimeout(() =>{
+
+
+  // getAudioAnalysis = () => {
+  //   let accessToken = sessionStorage.getItem('accessToken')
+  //   // setTimeout(() =>{
       
-      fetch(`https://api.spotify.com/v1/audio-analysis/${this.state.nowPlaying.song_id}`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`     
-        }
-      })
-      .then(resp => resp.json())
-      .then((song_data) => {
-        console.dir(song_data)
-        this.setState({
-          songAnalysis: song_data
-        }) 
-      })
-    }, 1000)
-  }
+  //     fetch(`https://api.spotify.com/v1/audio-analysis/${this.state.nowPlaying.song_id}`, {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`     
+  //       }
+  //     })
+  //     .then(resp => resp.json())
+  //     .then((song_data) => {
+  //       console.dir(song_data)
+  //       this.setState({
+  //         songAnalysis: song_data
+  //       }) 
+  //     })
+  //   // }, 2000)
+  // }
 
 
 
@@ -97,8 +116,13 @@ class App extends Component {
 
     return (
       <div className="App" >
+        {/* <button onClick={() => console.log(this.state.nowPlaying.song_id)}>song_id state</button>
+        <button onClick={() => this.getNowPlaying()}>get getNowPlaying</button> */}
+
         <SideContainer getNowPlaying={this.getNowPlaying} nowPlaying={this.state.nowPlaying}/>
-        <MainContainer songAnalysis={this.state.songAnalysis} getAudioAnalysis={this.getAudioAnalysis} getNowPlaying={this.getNowPlaying} nowPlaying={this.state.nowPlaying}/>
+        <MainContainer key={this.state.song_id} 
+        // songAnalysis={this.state.songAnalysis} getAudioAnalysis={this.getAudioAnalysis} 
+        getNowPlaying={this.getNowPlaying} nowPlaying={this.state.nowPlaying} isActive={this.state.isActive}/>
       </div>
     )
   }
