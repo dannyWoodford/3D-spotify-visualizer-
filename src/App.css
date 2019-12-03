@@ -96,9 +96,3 @@
   z-index: -1;
   outline:none;
 }
-
-#fuckYou{
-  position: absolute;
-  z-index: 4;
-  margin-top: 100px
-}

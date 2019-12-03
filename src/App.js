@@ -24,13 +24,18 @@ class App extends Component {
       uris: [],
       song_id: ""
       },
-
+      firstSong: true,
+      hasAnalysis: false,
+      songAnalysis: undefined,
+      energy: 0
   }
  
   params = this.getHashParams()
   params = spotifyApi.setAccessToken(this.params.access_token)
   
   getNowPlaying = () => {
+    let accessToken = sessionStorage.getItem('accessToken')
+
     spotifyApi.getMyCurrentPlaybackState({
     })
     .then((response) => {
@@ -40,18 +45,54 @@ class App extends Component {
         return null
       }
       else if(response.body.device.is_active === true){
-        this.setState({
-          isActive: true,
-        nowPlaying: {
-          title: response.body.item.name,
-          image: response.body.item.album.images[0].url,
-          artist: response.body.item.artists[0].name,
-          uris: response.body.item.uri,
-          song_id: response.body.item.id
-        }
-      })
-    }
-  })
+        this.getSongAnalysis(accessToken, response)
+        this.getSongFeatures(accessToken, response)
+      }
+    })
+}
+
+  getSongAnalysis = (accessToken, response) => {
+    fetch(`https://api.spotify.com/v1/audio-analysis/${response.body.item.id}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`     
+          }
+        })
+        .then(resp => resp.json())
+        .then((song_data) => {
+          console.log("promise", song_data.track.tempo)
+          this.setState({
+            isActive: true,
+            nowPlaying: {
+              title: response.body.item.name,
+              image: response.body.item.album.images[0].url,
+              artist: response.body.item.artists[0].name,
+              uris: response.body.item.uri,
+              song_id: response.body.item.id
+            },
+            firstSong: false,
+            songAnalysis: song_data,
+            hasAnalysis: true,
+          })//, () => console.log("New song tempo should be: ", this.state.songAnalysis.track.tempo)
+          // ) 
+        })
+  }
+
+  getSongFeatures = (accessToken,response) => {
+    fetch(`https://api.spotify.com/v1/audio-features/${response.body.item.id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${accessToken}`     
+      }
+    })
+    .then(resp => resp.json())
+    .then((song_features) => {
+      console.log("feature promise", song_features.energy)
+      this.setState({
+       energy: song_features.energy
+      })//, () => console.log("New song tempo should be: ", this.state.songAnalysis.track.tempo)
+      // ) 
+    })
   }
 
   getHashParams() {
@@ -59,9 +100,8 @@ class App extends Component {
     let e, r = /([^&;=]+)=?([^&;]*)/g,
         q = window.location.hash.substring(1);
     while ( e = r.exec(q)) {
-       hashParams[e[1]] = decodeURIComponent(e[2]);
+      hashParams[e[1]] = decodeURIComponent(e[2]);
     }
-    // console.log(hashParams.access_token)
     let access = hashParams.access_token
     sessionStorage.setItem('accessToken', access);
 
@@ -76,13 +116,21 @@ class App extends Component {
 
     return (
       <div className="App" >
-        {/* <button onClick={() => console.log(this.state.nowPlaying.song_id)}>song_id state</button>
-        <button onClick={() => this.getNowPlaying()}>get getNowPlaying</button> */}
 
-        <SideContainer getNowPlaying={this.getNowPlaying} nowPlaying={this.state.nowPlaying}/>
-        <MainContainer key={this.state.song_id} 
-        // songAnalysis={this.state.songAnalysis} getAudioAnalysis={this.getAudioAnalysis} 
-        getNowPlaying={this.getNowPlaying} nowPlaying={this.state.nowPlaying} isActive={this.state.isActive}/>
+        <SideContainer 
+            getNowPlaying={this.getNowPlaying} 
+            nowPlaying={this.state.nowPlaying}
+        />
+        <MainContainer 
+            key={this.state.song_id} 
+            getNowPlaying={this.getNowPlaying} 
+            energy={this.state.energy}
+            firstSong={this.state.firstSong}
+            hasAnalysis={this.state.hasAnalysis}
+            songAnalysis={this.state.songAnalysis}
+            nowPlaying={this.state.nowPlaying} 
+            isActive={this.state.isActive}
+        />
       </div>
     )
   }

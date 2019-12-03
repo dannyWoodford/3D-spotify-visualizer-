@@ -13,6 +13,7 @@ class Visuals extends Component {
     knot_color_1: 'rgb(200,100,20)',
     knot_color_2: 'rgb(205,128,100)',
     knot_color_3: 'rgb(205,198,200)',
+    newEnergy: this.props.energy * .1
   }
 
   componentDidMount() {
@@ -25,21 +26,7 @@ class Visuals extends Component {
       this.theTempo()
 
 
-    setInterval(() => {
-      this.setState({
-        tempoToggle: this.state.tempoToggle * -1
-      })
-    }, this.theTempo());
-
-    setInterval(() => {
-
-      this.knot1.position.z += 6 * this.state.tempoToggle
-      this.knot2.position.z += 6 * this.state.tempoToggle
-      this.knot3.position.z += 5 * this.state.tempoToggle
-      this.knot4.position.z += 4 * this.state.tempoToggle
-      // this.knot3.position.z += 1 * this.state.tempoToggle
-    }, this.theTempo());
-      console.log("on mount", this.props.songAnalysis.track.tempo)
+this.moveOnTempo()
   }
   
   componentWillUnmount() {
@@ -49,12 +36,13 @@ class Visuals extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState){
-    console.log("SCU?", nextProps.songAnalysis !== this.props.songAnalysis)
-    return nextProps.songAnalysis !== this.props.songAnalysis
+    return nextProps.nowPlaying.song_id !== this.props.nowPlaying.song_id
   }
 
   componentDidUpdate(){
     console.log("visuals update", this.props.songAnalysis)
+    console.log("song energy", this.props.energy)
+    console.log("song energy", this.state.newEnergy)
     this.knot1.position.z = 0
     this.knot2.position.z = 0
     this.knot3.position.z = 0
@@ -66,7 +54,8 @@ class Visuals extends Component {
     this.moveOnTempo()
 
     console.log("on update",this.props.songAnalysis.track.tempo)
-    
+    console.log(this.theTempo())
+    console.log("updated object", this.props.songAnalysis)
 
   }
 
@@ -89,8 +78,6 @@ theTempo(){
 }
 // Tempo----------------------------------------------------------------------------------------------- 
 
-
-
 moveOnTempo(){
   setInterval(() => {
     this.setState({
@@ -100,13 +87,22 @@ moveOnTempo(){
   
   setInterval(() => {
     
-    this.knot1.position.z += 6 * this.state.tempoToggle
-    this.knot2.position.z += 6 * this.state.tempoToggle
-    this.knot3.position.z += 5 * this.state.tempoToggle
-    this.knot4.position.z += 4 * this.state.tempoToggle
+    this.knot1.position.z += 10 * this.state.tempoToggle
+    this.knot2.position.z += 10 * this.state.tempoToggle
+    this.knot3.position.z += 10 * this.state.tempoToggle
+    this.knot4.position.z += 10 * this.state.tempoToggle
     // this.knot3.position.z += 1 * this.state.tempoToggle
   }, this.theTempo());
 }
+
+// Beat----------------------------------------------------------------------------------------------- 
+
+
+// Beat----------------------------------------------------------------------------------------------- 
+
+
+
+
 
 
 
@@ -271,15 +267,15 @@ moveOnTempo(){
     // this.knot.position.z += .1
     // this.knot.scale.x += -.005
 
-    this.knot1.rotation.z += .02;
-    this.knot1.rotation.x += .01;
-    this.knot2.rotation.z -= .01;
-    this.knot2.rotation.y += .02;
-    this.knot3.rotation.z -= .04;
-    this.knot3.rotation.y -= .05;
-    this.knot4.rotation.x -= .06;
-    this.knot4.rotation.y -= .06;
-    this.knot4.rotation.z -= .06;
+    this.knot1.rotation.z += (this.state.newEnergy - .03);
+    this.knot1.rotation.x += (this.state.newEnergy - .03);
+    this.knot2.rotation.z -= (this.state.newEnergy - .02);
+    this.knot2.rotation.y += (this.state.newEnergy - .01);
+    this.knot3.rotation.z -= (this.state.newEnergy );
+    this.knot3.rotation.y -= (this.state.newEnergy + .01);
+    this.knot4.rotation.x -= (this.state.newEnergy + .01);
+    this.knot4.rotation.y -= (this.state.newEnergy + .02);
+    this.knot4.rotation.z -= (this.state.newEnergy + .03);
     // this.knot.rotation.y += 0.02;
     this.controls.update();
     this.renderer.render(this.scene, this.camera);
@@ -330,12 +326,10 @@ this.requestID = window.requestAnimationFrame(this.startAnimationLoop);
   
   
   render() {
-    console.log("New song tempo is: ", this.props.songAnalysis.track.tempo)
     return (
-    <div>
-      <button onClick={() => console.log("visuals tempo", this.state.tempo)} >visuals tempo</button>
+   
     <div className="visuals" ref={ref => (this.el = ref)} />
-    </div>
+   
    )
   }
 }
