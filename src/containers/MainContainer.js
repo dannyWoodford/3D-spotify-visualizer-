@@ -2,36 +2,29 @@ import React from "react"
 import Visuals from '../components/Visuals.js'
 import Player from "../components/Player.js";
 
+
+
 class MainContainer extends React.Component {
-    state = { 
-      isMounted: false,
+    state = {
+      firstSong: true,
       hasAnalysis: false,
-      songAnalysis: []
-      };
+      songAnalysis: undefined
+    };
     
-    // componentDidMount(){
-    //   this.getAudioAnalysis()
-    // }
 
     shouldComponentUpdate(nextProps, nextState){
-      // console.log("component sould update?", nextProps.isActive !== this.props.isActive)
-      console.log(this.state.songAnalysis)
-      return nextProps.nowPlaying.song_id !== this.props.nowPlaying.song_id 
-      // return nextState.songAnalysis.length > this.state.songAnalysis
+      return nextProps.nowPlaying.song_id !== this.props.nowPlaying.song_id || nextState.firstSong !== this.state.firstSong 
     }
-
+    
     componentDidUpdate(){
-      this.isSongPlaying()
-      // console.log("woweeee")
       this.getAudioAnalysis()
-      // console.log("song analysis", this.state.songAnalysis)
+      console.log("fire", console.log(this.state.songAnalysis))
+
+      // setTimeout(() => {
+      //   console.log("fire", console.log(this.state.songAnalysis))
+      // },2000)
     }
 
-    isSongPlaying(){
-        this.setState({
-          isMounted: true
-        })
-    }
 
     getAudioAnalysis = () => {
       // console.log("HELLOOOOOO")
@@ -45,27 +38,31 @@ class MainContainer extends React.Component {
         })
         .then(resp => resp.json())
         .then((song_data) => {
-          console.dir(song_data)
+          console.log("promise", song_data.track.tempo)
           this.setState({
+            firstSong: false,
             songAnalysis: song_data,
-            hasAnalysis: true
-          }, 
-          // () => console.log("STATE AFTER GET AUDIO", this.state)
-          ) 
+            hasAnalysis: true,
+          })//, () => console.log("New song tempo should be: ", this.state.songAnalysis.track.tempo)
+          // ) 
         })
-        // .then(() => this.setState({hasAnalysis: true}))
     }
+
 
   
     render() {
+      console.log("MC RENDER", this.state.songAnalysis)
       return (
         <div id="main-container" > 
             <a href="http://localhost:8888" >
                 <button className="login">Login to Spotify</button>
             </a>
-          
-          {this.state.hasAnalysis ? <Visuals song_id={this.props.nowPlaying.song_id} songAnalysis={this.state.songAnalysis} /> : console.log('bad', this.state.songAnalysis.length)}
-          <Player getSong_id={this.getSong_id}  getNowPlaying={this.props.getNowPlaying} isMounted={this.state.isMounted} nowPlaying={this.props.nowPlaying}/>
+
+          {this.state.hasAnalysis ? <Visuals song_id={this.props.nowPlaying.song_id} songAnalysis={this.state.songAnalysis} />  : console.log('no visual')}
+          <Player getSong_id={this.getSong_id} isSongPlaying={this.isSongPlaying} getNowPlaying={this.props.getNowPlaying} nowPlaying={this.props.nowPlaying}/>
+          <div id={"fuckYou"} >
+            <button onClick={() => console.log("main cont button",this.state.songAnalysis.track.tempo)}>container tempo</button>
+          </div>
         </div>
       );
     }

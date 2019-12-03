@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SideContainer from './containers/SideContainer';
 import MainContainer from './containers/MainContainer';
-// import Header from './components/Header';
+
 
 
 const SpotifyWebApi = require('spotify-web-api-node');
@@ -24,7 +24,7 @@ class App extends Component {
       uris: [],
       song_id: ""
       },
-    // songAnalysis: []
+
   }
  
   params = this.getHashParams()
@@ -68,46 +68,6 @@ class App extends Component {
     return hashParams;
   }
 
-
-  // componentDidMount(){
-  //   this.getNowPlaying()
-  //   // this.getAudioAnalysis()
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState){
-  //   console.log(nextState.nowPlaying.song_id )
-  //   console.log(this.state.nowPlaying.song_id )
-  //   // this.getNowPlaying()
-  //   return ( nextState.nowPlaying.song_id !== this.state.nowPlaying.song_id )
-  // }
-
-  // componentDidUpdate(){
-  //   console.log("fire")
-  //   this.getNowPlaying()
-  // }
-
-
-
-
-  // getAudioAnalysis = () => {
-  //   let accessToken = sessionStorage.getItem('accessToken')
-  //   // setTimeout(() =>{
-      
-  //     fetch(`https://api.spotify.com/v1/audio-analysis/${this.state.nowPlaying.song_id}`, {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`     
-  //       }
-  //     })
-  //     .then(resp => resp.json())
-  //     .then((song_data) => {
-  //       console.dir(song_data)
-  //       this.setState({
-  //         songAnalysis: song_data
-  //       }) 
-  //     })
-  //   // }, 2000)
-  // }
 
 
 

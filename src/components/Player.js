@@ -3,11 +3,6 @@ import SpotifyPlayer from 'react-spotify-web-playback';
 
 class Player extends Component {
 
-    // stopVisual() {
-    //     this.setState({
-    //         isMounted: false
-    //     })
-    // }
 
     renderPlayer = () => {
         let data = sessionStorage.getItem('accessToken')
@@ -24,28 +19,17 @@ class Player extends Component {
             trackNameColor: 'rgba(255,255,255,.0)',
           }} token={data} uris={this.props.nowPlaying.uris} 
           callback={(state) => {
-        
+            // console.log(state)
+            // console.log(state.nextTracks)
             setTimeout(
                 this.props.getNowPlaying
-                , 300)
-            }}
-          />;
-      }
+                , 400)
+            }}  
+            />
+    }
 
 
-    //   componentDidUpdate(prevProps, prevState){
-    //       if(this.props.nowPlaying.song_id !== prevProps.nowPlaying.song_id){
-    //           this.props.getNowPlaying()
-    //             // setTimxeout(() =>{
-    //         // this.props.getAudioAnalysis()
-    //     // },100)
-    // }
-    // // console.log("hhh",this.props.songAnalysis)
-    // }
-    
     render() {
-        // setTimeout(() =>{
-        // },100)
         return (
             <div id="player"  >
                 {this.renderPlayer()}
