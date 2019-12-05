@@ -9,7 +9,7 @@ class Player extends Component {
 
         return <SpotifyPlayer styles={{
             altColor: 'rgb(255, 0, 0)',
-            bgColor: 'rgba(255,255,255,.08)',
+            bgColor: 'rgba(255,0,0,.1)',
             sliderHandleColor: 'rgba(255, 255, 255, 0.698)',
             sliderColor: "rgba(0,0,255, 0.7)",
             sliderTrackColor: "rgba(255,255,255, .2)",

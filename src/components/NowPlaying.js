@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+// import { TweenLite, TimelineMax, Expo, Linear, Back, Sine } from 'gsap';
 
 
 class NowPlaying extends Component {
@@ -7,18 +7,21 @@ class NowPlaying extends Component {
 
     componentDidMount(){
         this.props.getNowPlaying()
+        // this.animateImage()
     }
 
-    // componentDidUpdate(prevProps, prevState) {
-    //     if(prevProps.nowPlaying.song_id !== this.props.nowPlaying.song_id){
-    //         this.props.getNowPlaying()
-    //     }
+    // animateImage(){
+    
+    // this.tl = new TimelineMax();
+    // // this.tl.from(this.myElement.rotation, .5, {x:"+=30", ease:Expo.easeOut});
+    // this.tl.to(this.myElement, 0.5, {y: 100, rotation: 180})
     // }
+
     
     render() {
         return (
             <div id="now-playing">
-                <img id="album-cover" src={this.props.nowPlaying.image} alt="album cover"   />
+                <img ref={div => this.myElement = div} id="album-cover" src={this.props.nowPlaying.image} alt="album cover"   />
                 <h5 id="title">{this.props.nowPlaying.title}</h5>
                 <h4 id="artist">{this.props.nowPlaying.artist}</h4>
             </div>

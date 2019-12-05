@@ -6,9 +6,9 @@
   display: grid;
   grid-template-columns: 22% 78%;
   background: #3D3D3D;
-  background: -moz-linear-gradient(-45deg, rgb(82, 72, 72) 0%, rgb(26, 23, 23) 37%, rgb(0, 0, 0) 100%);
-  background: -webkit-linear-gradient(-45deg, rgb(82, 72, 72) 0%, rgb(26, 23, 23) 37%, #000000 100%);
-  background: linear-gradient(135deg, rgb(82, 72, 72) 0%, rgb(26, 23, 23) 37%, #000000 100%);
+  background: -moz-linear-gradient(-45deg, rgb(10, 9, 9) 0%, rgb(26, 23, 23) 37%, rgba(0, 0, 0, 1) 100%);
+  background: -webkit-linear-gradient(-45deg, rgb(10, 9, 9) 0%, rgb(26, 23, 23) 37%, rgba(0, 0, 0, 1) 100%);
+  background: linear-gradient(135deg, rgb(10, 9, 9) 0%, rgb(26, 23, 23) 37%, rgba(0, 0, 0, 1) 100%);
 }
 
 
@@ -56,9 +56,9 @@
 }
 
 #now-playing {
-  border: 20px outset rgba(255, 0, 0, 0.149) ;
+  border: 20px outset rgba(255, 0, 0, 0.164) ;
   grid-row: 2;
-  background-color: #380f0f13;
+  background-color: #4420201a;
 }
 
   #now-playing #album-cover {

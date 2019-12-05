@@ -27,7 +27,7 @@ class App extends Component {
       firstSong: true,
       hasAnalysis: false,
       songAnalysis: undefined,
-      energy: 0
+      energy: 0,
   }
  
   params = this.getHashParams()
@@ -60,7 +60,7 @@ class App extends Component {
         })
         .then(resp => resp.json())
         .then((song_data) => {
-          console.log("promise", song_data.track.tempo)
+          console.log("song analysis", song_data)
           this.setState({
             isActive: true,
             nowPlaying: {
@@ -87,7 +87,7 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then((song_features) => {
-      console.log("feature promise", song_features.energy)
+      console.log("song features", song_features)
       this.setState({
        energy: song_features.energy
       })//, () => console.log("New song tempo should be: ", this.state.songAnalysis.track.tempo)
