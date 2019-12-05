@@ -10,7 +10,8 @@ class Visuals extends Component {
     tempo: this.props.songAnalysis.track.tempo,
     tempoToggle: 1,
     newEnergy: this.props.energy * .1,
-    beats: this.props.songAnalysis.beats
+    beats: this.props.songAnalysis.beats,
+    songDuration: this.props.songAnalysis.track.duration
   }
 
 
@@ -161,8 +162,8 @@ moveOnTempo(){
     
       console.log("Im the Beattime", beatTime)
     
-      const geometry = new THREE.RingBufferGeometry( 200, 230, 1, 12, 5, 6.3 );
-      const material = new THREE.MeshBasicMaterial( {
+      const geometry = new THREE.RingBufferGeometry( 200, 330, 30, 12, 5, 6.3 );
+      const material = new THREE.MeshNormalMaterial( {
          color: "white", 
          side: THREE.DoubleSide,
         wireframe: true } );
@@ -170,13 +171,63 @@ moveOnTempo(){
     
       for(let i = 0; i<beatTime.length; i++){
         this.ring = new THREE.Mesh( geometry, material );
-          setTimeout(() => {
+        this.ring2 = new THREE.Mesh( geometry, material );
+          setInterval(() => {
             this.ring.position.z = -100
+            this.ring2.position.z = -100
             this.scene.add( this.ring );
-            console.log(beatTime[i])
-          }, beatTime[i])
+            this.scene.add( this.ring2 );
+          }, beatTime[0])
       }
-    
+
+
+
+
+
+
+      const beatGeo = new THREE.TorusBufferGeometry( 160, 28, 3, 400, 6.3 );
+      const material2 = new THREE.MeshPhysicalMaterial({
+        color: 'rgb(0,0,0)',
+        emissive: 'black',
+        side: THREE.DoubleSide,
+        flatShading: true,
+        metalness: .8,
+      });
+
+      this.beatRing = new THREE.Mesh( beatGeo, material2 );
+      this.beatRing.position.z = 0
+      this.scene.add( this.beatRing );
+
+
+
+
+      const beatGeo1 = new THREE.TorusBufferGeometry( 250, 15, 3, 400, 6.3 );
+      const material3 = new THREE.MeshPhysicalMaterial({
+        color: 'rgb(0,0,0)',
+        emissive: 'black',
+        side: THREE.DoubleSide,
+        flatShading: true,
+        metalness: .8,
+      });
+
+      this.beatRing2 = new THREE.Mesh( beatGeo1, material3 );
+      this.beatRing2.position.z = 0
+      this.scene.add( this.beatRing2 );
+     
+     
+     
+      const beatGeo2 = new THREE.TorusBufferGeometry( 300, 2, 3, 400, 6.3 );
+      const material4 = new THREE.MeshPhysicalMaterial({
+        color: 'rgb(0,0,0)',
+        emissive: 'black',
+        side: THREE.DoubleSide,
+        flatShading: true,
+        metalness: .8,
+      });
+
+      this.beatRing2 = new THREE.Mesh( beatGeo2, material4 );
+      this.beatRing2.position.z = 0
+      this.scene.add( this.beatRing2 );
 
   
     
@@ -186,6 +237,7 @@ moveOnTempo(){
   
     this.lights()
   };
+
 
 
 
@@ -305,7 +357,7 @@ moveOnTempo(){
   knot1 = () => {
     const geometry = new THREE.TorusKnotGeometry( 92, 5, 30, 3, 2, 11 );
     const material = new THREE.MeshPhysicalMaterial({
-      color: 'rgb(200,100,20)',
+      color: 'rgb(255,255,255)',
       emissive: 'black',
       side: THREE.DoubleSide,
       flatShading: true,
@@ -324,7 +376,7 @@ moveOnTempo(){
   knot2 = () => {
     const geometry = new THREE.TorusKnotGeometry( 54, 6, 64, 2, 3, 11 );
     const material = new THREE.MeshPhysicalMaterial({
-      color: 'rgb(250,0,0)',
+      color: 'rgb(255,255,255)',
       emissive: 'black',
       side: THREE.DoubleSide,
       flatShading: true,
@@ -343,7 +395,7 @@ moveOnTempo(){
   knot3 = () => {
     const geometry = new THREE.TorusKnotGeometry( 35, 8, 30, 8, 4, 12 );
     const material = new THREE.MeshPhysicalMaterial({
-      color: 'rgb(255,128,80)',
+      color: 'rgb(255,255,255)',
       emissive: 'black',
       side: THREE.DoubleSide,
       flatShading: true,
@@ -362,7 +414,7 @@ moveOnTempo(){
   knot4 = () => {
     const geometry = new THREE.TorusKnotGeometry( 10, 8, 44, 8, 5, 11 );
     const material = new THREE.MeshPhysicalMaterial({
-      color: 'rgb(205,205,205)',
+      color: 'rgb(255,255,255)',
       emissive: 'black',
       side: THREE.DoubleSide,
       flatShading: true,
@@ -401,7 +453,7 @@ moveOnTempo(){
     lights[2] = new THREE.PointLight(0xffffff, 1, 0);
 
     lights[0].position.set(0, 200, 0);
-    lights[1].position.set(100, 200, 100);
+    lights[1].position.set(200, 500, 300);
     lights[2].position.set(-100, -200, -100);
 
     this.scene.add(lights[0]);
@@ -428,12 +480,20 @@ moveOnTempo(){
     this.rain1.position.z += this.props.energy
     this.rain2.position.z += this.props.energy + .2
     this.rain3.rotation.z += .0001 * this.state.newEnergy
+
+
+    // this.beatRing.position.z += .4
     // this.rain.position.x += .01
     
     this.ring.position.z += 20
     this.ring.rotation.z += .005
     this.ring.rotation.x += .03
     this.ring.rotation.y += .03
+   
+    this.ring2.position.z += 20
+    this.ring2.rotation.z -= .005
+    this.ring2.rotation.x -= .03
+    this.ring2.rotation.y -= .03
 
     this.knot1.rotation.z += (this.state.newEnergy - .05);
     this.knot1.rotation.x += (this.state.newEnergy - .05);

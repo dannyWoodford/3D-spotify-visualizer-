@@ -19,7 +19,6 @@ class Player extends Component {
             trackNameColor: 'rgba(255,255,255,.0)',
           }} token={data} uris={this.props.nowPlaying.uris} 
           callback={(state) => {
-            // console.log(state)
             // console.log(state.nextTracks)
             setTimeout(
                 this.props.getNowPlaying
