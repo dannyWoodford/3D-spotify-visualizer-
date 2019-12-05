@@ -120,6 +120,7 @@ class App extends Component {
         <SideContainer 
             getNowPlaying={this.getNowPlaying} 
             nowPlaying={this.state.nowPlaying}
+            hasAnalysis={this.state.hasAnalysis}
         />
         <MainContainer 
             key={this.state.song_id} 

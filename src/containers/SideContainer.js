@@ -11,7 +11,7 @@ class SideContainer extends Component {
             <div id="side-container"  >
                 <div id="songs">
                 </div>
-                <NowPlaying getNowPlaying={this.props.getNowPlaying} nowPlaying={this.props.nowPlaying} />
+                <NowPlaying hasAnalysis={this.props.hasAnalysis} getNowPlaying={this.props.getNowPlaying} nowPlaying={this.props.nowPlaying} />
             </div>
         );
     }

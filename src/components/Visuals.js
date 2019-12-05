@@ -11,7 +11,7 @@ class Visuals extends Component {
     tempoToggle: 1,
     newEnergy: this.props.energy * .1,
     beats: this.props.songAnalysis.beats,
-    songDuration: this.props.songAnalysis.track.duration
+    songDuration: this.props.songAnalysis.track.duration,
   }
 
 
@@ -22,7 +22,7 @@ class Visuals extends Component {
     window.addEventListener("resize", this.handleWindowResize);
     
     // console.log(this.beat)
-    console.log("beats", this.state.beats)
+    // console.log("beats", this.state.beats)
     
     // console.log(this.state.beats[0].duration)
     this.getTempo()
@@ -43,7 +43,7 @@ class Visuals extends Component {
   componentDidUpdate(){
     // console.log("visuals update", this.props.songAnalysis)
     // console.log("song energy", this.props.energy)
-    // console.log("song new energy", this.state.newEnergy)
+    console.log("song new energy", this.state.newEnergy)
     // console.log("beat length", this.getBeatDurations())
     this.rain1.position.z = 0
     this.rain2.position.z = 0
@@ -51,7 +51,7 @@ class Visuals extends Component {
     this.knot2.rotation.z = 0
     this.knot3.rotation.z = 0
     this.knot4.rotation.z = 0
-    this.camera.position.set( 0, 0, 230 );
+    this.camera.position.set( 0, 0, 260 );
 
     this.getTempo()
     this.theTempo()
@@ -133,13 +133,13 @@ moveOnTempo(){
     // this.camera.add( listener );
 
     this.controls = new OrbitControls(this.camera, this.el);
-    this.camera.position.set( 0, 0, 230 );
+    this.camera.position.set( 0, 0, 260 );
     this.controls.update();
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer = new THREE.WebGLRenderer( { alpha: true } );
     this.renderer.setSize(width, height);
-    // this.renderer.setClearColor( "white", 0 );
+    this.renderer.setClearColor( "white", 0 );
     this.el.appendChild(this.renderer.domElement); // mount using React ref
 
   };
@@ -162,7 +162,7 @@ moveOnTempo(){
     
       console.log("Im the Beattime", beatTime)
     
-      const geometry = new THREE.RingBufferGeometry( 200, 330, 30, 12, 5, 6.3 );
+      const geometry = new THREE.RingBufferGeometry( 200, 300, 30, 12, 5, 6.3 );
       const material = new THREE.MeshNormalMaterial( {
          color: "white", 
          side: THREE.DoubleSide,
@@ -172,11 +172,18 @@ moveOnTempo(){
       for(let i = 0; i<beatTime.length; i++){
         this.ring = new THREE.Mesh( geometry, material );
         this.ring2 = new THREE.Mesh( geometry, material );
+        this.ring3 = new THREE.Mesh( geometry, material );
+        this.ring4 = new THREE.Mesh( geometry, material );
           setInterval(() => {
             this.ring.position.z = -100
             this.ring2.position.z = -100
+            this.ring3.position.z = -100
+            this.ring4.position.z = -100
+
             this.scene.add( this.ring );
             this.scene.add( this.ring2 );
+            this.scene.add( this.ring3 );
+            this.scene.add( this.ring4 );
           }, beatTime[0])
       }
 
@@ -338,7 +345,7 @@ moveOnTempo(){
         let sprite = new THREE.TextureLoader().load( 'star-map.png' );
   
         const material = new THREE.PointsMaterial({
-          color: "#36ffff",
+          color: "#80ffff",
           size: Math.random() * .8 + .3,
           map: sprite,
           transparent: true
@@ -376,7 +383,7 @@ moveOnTempo(){
   knot2 = () => {
     const geometry = new THREE.TorusKnotGeometry( 54, 6, 64, 2, 3, 11 );
     const material = new THREE.MeshPhysicalMaterial({
-      color: 'rgb(255,255,255)',
+      color: 'rgb(255,100,100)',
       emissive: 'black',
       side: THREE.DoubleSide,
       flatShading: true,
@@ -395,7 +402,7 @@ moveOnTempo(){
   knot3 = () => {
     const geometry = new THREE.TorusKnotGeometry( 35, 8, 30, 8, 4, 12 );
     const material = new THREE.MeshPhysicalMaterial({
-      color: 'rgb(255,255,255)',
+      color: 'rgb(255,55,55)',
       emissive: 'black',
       side: THREE.DoubleSide,
       flatShading: true,
@@ -487,13 +494,26 @@ moveOnTempo(){
     
     this.ring.position.z += 20
     this.ring.rotation.z += .005
-    this.ring.rotation.x += .03
-    this.ring.rotation.y += .03
+    this.ring.rotation.x += this.state.newEnergy -.03
+    this.ring.rotation.y += this.state.newEnergy -.03
    
     this.ring2.position.z += 20
     this.ring2.rotation.z -= .005
-    this.ring2.rotation.x -= .03
-    this.ring2.rotation.y -= .03
+    this.ring2.rotation.x -= this.state.newEnergy -.03
+    this.ring2.rotation.y -= this.state.newEnergy -.03
+
+    this.ring3.position.z += 20
+    this.ring3.rotation.z += .005
+    this.ring3.rotation.x -= this.state.newEnergy -.03
+    this.ring3.rotation.y -= this.state.newEnergy -.03
+
+    this.ring4.position.z += 20
+    this.ring4.rotation.z += .005
+    this.ring4.rotation.x += this.state.newEnergy -.03
+    this.ring4.rotation.y -= this.state.newEnergy -.03
+
+
+
 
     this.knot1.rotation.z += (this.state.newEnergy - .05);
     this.knot1.rotation.x += (this.state.newEnergy - .05);

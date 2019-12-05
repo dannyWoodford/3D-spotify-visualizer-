@@ -5,11 +5,6 @@ import Player from "../components/Player.js";
 
 
 class MainContainer extends React.Component {
-    // state = {
-    //   firstSong: true,
-    //   hasAnalysis: false,
-    //   songAnalysis: undefined
-    // };
     
 
     shouldComponentUpdate(nextProps, nextState){
@@ -19,30 +14,6 @@ class MainContainer extends React.Component {
     componentDidUpdate(){
       this.props.getNowPlaying()
     }
-
-
-    // getAudioAnalysis = () => {
-    //   // console.log("HELLOOOOOO")
-    //   let accessToken = sessionStorage.getItem('accessToken')
-
-    //     fetch(`https://api.spotify.com/v1/audio-analysis/${this.props.nowPlaying.song_id}`, {
-    //       method: "GET",
-    //       headers: {
-    //         Authorization: `Bearer ${accessToken}`     
-    //       }
-    //     })
-    //     .then(resp => resp.json())
-    //     .then((song_data) => {
-    //       console.log("promise", song_data.track.tempo)
-    //       this.setState({
-    //         firstSong: false,
-    //         songAnalysis: song_data,
-    //         hasAnalysis: true,
-    //       })//, () => console.log("New song tempo should be: ", this.state.songAnalysis.track.tempo)
-    //       // ) 
-    //     })
-    // }
-
 
   
     render() {
