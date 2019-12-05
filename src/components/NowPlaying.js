@@ -19,6 +19,7 @@ class NowPlaying extends Component {
 
     
     render() {
+        // console.log(this.props.nowPlaying)
         return (
             <div id="now-playing">
                 {this.props.hasAnalysis ? <img ref={div => this.myElement = div} id="album-cover" src={this.props.nowPlaying.image} alt="album cover"   /> : console.log("no photo")}

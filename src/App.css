@@ -6,9 +6,9 @@
   display: grid;
   grid-template-columns: 22% 78%;
   background: #3D3D3D;
-  background: -moz-linear-gradient(-45deg, rgb(0, 0, 0) 0%, rgb(42, 37, 37) 37%, rgba(0, 0, 0, 1) 100%);
-  background: -webkit-linear-gradient(-45deg, rgb(0, 0, 0) 0%, rgb(26, 23, 23) 37%, rgba(0, 0, 0, 1) 100%);
-  background: linear-gradient(135deg, rgb(0, 0, 0) 0%, rgb(26, 23, 23) 37%, rgba(0, 0, 0, 1) 100%);
+  background: -moz-linear-gradient(-45deg, rgb(0, 0, 0) 0%, rgb(49, 43, 43) 30%, rgba(0, 0, 0, 1) 100%);
+  background: -webkit-linear-gradient(-45deg, rgb(0, 0, 0) 0%, rgb(49, 43, 43) 30%, rgba(0, 0, 0, 1) 100%);
+  background: linear-gradient(135deg, rgb(0, 0, 0) 0%, rgb(49, 43, 43) 30%, rgba(0, 0, 0, 1) 100%);
 }
 
 

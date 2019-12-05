@@ -60,7 +60,7 @@ class App extends Component {
         })
         .then(resp => resp.json())
         .then((song_data) => {
-          console.log("song analysis", song_data)
+          // console.log("song analysis", song_data)
           this.setState({
             isActive: true,
             nowPlaying: {
@@ -87,7 +87,7 @@ class App extends Component {
     })
     .then(resp => resp.json())
     .then((song_features) => {
-      console.log("song features", song_features)
+      // console.log("song features", song_features)
       this.setState({
        energy: song_features.energy
       })//, () => console.log("New song tempo should be: ", this.state.songAnalysis.track.tempo)

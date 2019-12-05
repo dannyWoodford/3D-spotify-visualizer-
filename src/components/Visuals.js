@@ -43,10 +43,11 @@ class Visuals extends Component {
   componentDidUpdate(){
     // console.log("visuals update", this.props.songAnalysis)
     // console.log("song energy", this.props.energy)
-    console.log("song new energy", this.state.newEnergy)
+    // console.log("song new energy", this.state.newEnergy)
     // console.log("beat length", this.getBeatDurations())
     this.rain1.position.z = 0
     this.rain2.position.z = 0
+    // this.rain3.position.z = 0
     this.knot1.rotation.z = 0
     this.knot2.rotation.z = 0
     this.knot3.rotation.z = 0
@@ -160,7 +161,7 @@ moveOnTempo(){
         beatTime.push(Math.floor(beat.duration *1000))
       })
     
-      console.log("Im the Beattime", beatTime)
+      // console.log("Im the Beattime", beatTime)
     
       const geometry = new THREE.RingBufferGeometry( 200, 300, 30, 12, 5, 6.3 );
       const material = new THREE.MeshNormalMaterial( {
@@ -173,17 +174,17 @@ moveOnTempo(){
         this.ring = new THREE.Mesh( geometry, material );
         this.ring2 = new THREE.Mesh( geometry, material );
         this.ring3 = new THREE.Mesh( geometry, material );
-        this.ring4 = new THREE.Mesh( geometry, material );
+        // this.ring4 = new THREE.Mesh( geometry, material );
           setInterval(() => {
             this.ring.position.z = -100
             this.ring2.position.z = -100
             this.ring3.position.z = -100
-            this.ring4.position.z = -100
+            // this.ring4.position.z = -100
 
             this.scene.add( this.ring );
             this.scene.add( this.ring2 );
             this.scene.add( this.ring3 );
-            this.scene.add( this.ring4 );
+            // this.scene.add( this.ring4 );
           }, beatTime[0])
       }
 
@@ -223,7 +224,7 @@ moveOnTempo(){
      
      
      
-      const beatGeo2 = new THREE.TorusBufferGeometry( 300, 2, 3, 400, 6.3 );
+      const beatGeo2 = new THREE.TorusBufferGeometry( 310, 2, 3, 400, 6.3 );
       const material4 = new THREE.MeshPhysicalMaterial({
         color: 'rgb(0,0,0)',
         emissive: 'black',
@@ -248,30 +249,8 @@ moveOnTempo(){
 
 
 
-  // beatGenerator = (beatObject) => {
-  //   this.state.beats.forEach((b) => {
-  //       this.tl = new TimelineMax()
-  //       this.tl.to(this.beat.position, b.duration, {z: '+=40', ease: Expo.easeIn})
-  //   })
-  // }
-  // smoke(){
-  //   let loader = new THREE.TextureLoader();
 
-  //   loader.load("smoke_transparent_background.png", function (texture){
-  //     const portalGeo = new THREE.PlaneBufferGeometry(350,350);
-  //     const portalMaterial = new THREE.MeshStandardMaterial({
-  //         map:texture,
-  //         transparent: true
-  //     });
-  //     // for(let p=880;p>250;p--) {
-  //         this.particle = new THREE.Mesh(portalGeo,portalMaterial);
-  //         this.particle.position.set(2,2,2);
-  //         this.particle.rotation.z = Math.random() *360;
-  //         // portalParticles.push(particle);
-  //         this.scene.add(this.particle);
-  //     // }
-  // });
-  // }
+
 
   stars1(){
     const rainGeo = new THREE.Geometry()
@@ -281,7 +260,7 @@ moveOnTempo(){
       let raindrop = new THREE.Vector3(
         Math.random() * 800 -500,
         Math.random() * 800 -500,
-        Math.random() * 5000 -2000,
+        Math.random() * 8000 -2000,
         )
         
         rainGeo.vertices.push(raindrop)
@@ -289,8 +268,8 @@ moveOnTempo(){
 
 
       const material = new THREE.PointsMaterial({
-        color: "#fcfcfa",
-        size: Math.random() * .6 + .2,
+        color: "#ffff66",
+        size: Math.random() * 1 + .2,
         transparent: false
       })
         
@@ -301,7 +280,7 @@ moveOnTempo(){
 
     stars2(){
       const rainGeo = new THREE.Geometry()
-      const stars = 25000
+      const stars = 20000
       
       for(let i=0; i<stars; i++){
         let raindrop = new THREE.Vector3(
@@ -316,8 +295,8 @@ moveOnTempo(){
         // let sprite = new THREE.TextureLoader().load( 'star-map.png' );
   
         const material = new THREE.PointsMaterial({
-          color: "#e8d55a",
-          size: Math.random() * .6 + .2,
+          color: "#ffffff",
+          size: Math.random() * .9 + .2,
           // map: sprite,
           transparent: true
         })
@@ -330,24 +309,24 @@ moveOnTempo(){
 
     stars3(){
       const rainGeo = new THREE.Geometry()
-      const stars = 5000
+      const stars = 3000
       
       for(let i=0; i<stars; i++){
         let raindrop = new THREE.Vector3(
           Math.random() * 500 -350,
           Math.random() * 500 -350,
-          Math.random() * 2000 -700,
+          Math.random() * 1000 -700,
           )
           
           rainGeo.vertices.push(raindrop)
         }
   
-        let sprite = new THREE.TextureLoader().load( 'star-map.png' );
+        // let sprite = new THREE.TextureLoader().load( 'star-map.png' );
   
         const material = new THREE.PointsMaterial({
-          color: "#80ffff",
-          size: Math.random() * .8 + .3,
-          map: sprite,
+          color: "#00ccff",
+          size: Math.random() * .7 + .3,
+          // map: sprite,
           transparent: true
         })
   
@@ -364,11 +343,11 @@ moveOnTempo(){
   knot1 = () => {
     const geometry = new THREE.TorusKnotGeometry( 92, 5, 30, 3, 2, 11 );
     const material = new THREE.MeshPhysicalMaterial({
-      color: 'rgb(255,255,255)',
+      color: 'rgb(255,200,200)',
       emissive: 'black',
       side: THREE.DoubleSide,
       flatShading: true,
-      metalness: 1.0,
+      metalness: .6,
     });
     this.knot1 = new THREE.Mesh(geometry, material);
 
@@ -383,7 +362,7 @@ moveOnTempo(){
   knot2 = () => {
     const geometry = new THREE.TorusKnotGeometry( 54, 6, 64, 2, 3, 11 );
     const material = new THREE.MeshPhysicalMaterial({
-      color: 'rgb(255,100,100)',
+      color: 'rgb(255,55,55)',
       emissive: 'black',
       side: THREE.DoubleSide,
       flatShading: true,
@@ -402,7 +381,7 @@ moveOnTempo(){
   knot3 = () => {
     const geometry = new THREE.TorusKnotGeometry( 35, 8, 30, 8, 4, 12 );
     const material = new THREE.MeshPhysicalMaterial({
-      color: 'rgb(255,55,55)',
+      color: 'rgb(255,100,100)',
       emissive: 'black',
       side: THREE.DoubleSide,
       flatShading: true,
@@ -460,7 +439,7 @@ moveOnTempo(){
     lights[2] = new THREE.PointLight(0xffffff, 1, 0);
 
     lights[0].position.set(0, 200, 0);
-    lights[1].position.set(200, 500, 300);
+    lights[1].position.set(200, 200, 300);
     lights[2].position.set(-100, -200, -100);
 
     this.scene.add(lights[0]);
@@ -486,31 +465,32 @@ moveOnTempo(){
 
     this.rain1.position.z += this.props.energy
     this.rain2.position.z += this.props.energy + .2
-    this.rain3.rotation.z += .0001 * this.state.newEnergy
+    this.rain3.rotation.z += .08 * this.state.newEnergy
+    // this.rain3.position.z -= .001 * this.state.newEnergy
 
 
     // this.beatRing.position.z += .4
     // this.rain.position.x += .01
     
     this.ring.position.z += 20
-    this.ring.rotation.z += .005
+    this.ring.rotation.z += .05
     this.ring.rotation.x += this.state.newEnergy -.03
     this.ring.rotation.y += this.state.newEnergy -.03
    
     this.ring2.position.z += 20
-    this.ring2.rotation.z -= .005
+    this.ring2.rotation.z -= .05
     this.ring2.rotation.x -= this.state.newEnergy -.03
     this.ring2.rotation.y -= this.state.newEnergy -.03
 
     this.ring3.position.z += 20
-    this.ring3.rotation.z += .005
+    this.ring3.rotation.z += .05
     this.ring3.rotation.x -= this.state.newEnergy -.03
-    this.ring3.rotation.y -= this.state.newEnergy -.03
+    this.ring3.rotation.y += this.state.newEnergy -.03
 
-    this.ring4.position.z += 20
-    this.ring4.rotation.z += .005
-    this.ring4.rotation.x += this.state.newEnergy -.03
-    this.ring4.rotation.y -= this.state.newEnergy -.03
+    // this.ring4.position.z += 20
+    // this.ring4.rotation.z += .05
+    // this.ring4.rotation.x += this.state.newEnergy -.03
+    // this.ring4.rotation.y -= this.state.newEnergy -.03
 
 
 
@@ -540,15 +520,7 @@ moveOnTempo(){
 // this.tl.to(this.knot4.scale, 10, {y: -2, ease: Expo.easeOut})
     
     
-    // rainGeo.forEach(p => {
-      //   p.velocity -= 0.1 + Math.random() * 0.1;
-      //   p.y += p.velocity;
-      //   if (p.y < -200) {
-        //     p.y = 200;
-        //     p.velocity = 0;
-        //   }
-        // })
-        
+  
         
         
         
