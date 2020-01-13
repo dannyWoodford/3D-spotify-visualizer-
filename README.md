@@ -1,4 +1,4 @@
-## 3D Spotify Visualizer
+## 3D Spotify Visualizer(Three.js and React)
 Demo https://www.youtube.com/watch?v=SIk1UGomKik
 
  This project is a 3D music visualizer that connects to your Spotify account and allows for web playback audio control. The visuals move dynamically to the song by making two API calls to Spotify's API. The first to acquire the "audio analysis" for not only data like tempo, beat, or song duration for dynamic movement, but for the album cover image and artist name for the interface display. The second API call acquires "audio features" like danceability or energy.
