@@ -11,6 +11,12 @@
 ## Build status
 Build has main functionalty built out.The project was created in react at the deficate of using Three.js to allow for modualr expansion of non-visualizer features like song selection, the ability to create playlist and more. 
 
+## Example Track Analysis
+https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-analysis/
+
+## Example Track Analysis
+https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/
+
 ## Tech/framework used
 react
 
