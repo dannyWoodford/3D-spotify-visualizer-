@@ -14,7 +14,7 @@ Build has main functionalty built out.The project was created in react at the de
 ## Example Track Analysis
 https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-analysis/
 
-## Example Track Analysis
+## Example Track Features
 https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/
 
 ## Tech/framework used
