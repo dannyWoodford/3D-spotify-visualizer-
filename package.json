@@ -10,7 +10,7 @@
     "react-spotify-web-playback": "^0.6.0",
     "spotify-web-api-js": "^1.2.0",
     "spotify-web-api-node": "^4.0.0",
-    "three": "^0.110.0"
+    "three": "^0.137.0"
   },
   "scripts": {
     "start": "react-scripts start",
